@@ -16,12 +16,10 @@ This tool help to find and grab web-data from olx.ua.
 #### Using
 Please note, I have used Mozilla FireFox as browser for Capybara. Just run run_scaper.rb from the terminal. All grab data will save in JSON to data.txt in the script's root folder.
 ```
-ruby run_scraper.rb
+ruby run_script.rb
 ```
 
 ##### OLX web-data scraper file list
 - [x] config.rb
-- [x] browser.rb
-- [x] pagination_parser.rb 
-- [x] data_grabber.rb
-- [x] save_data.rb
+- [x] scraper.rb
+- [x] run_script.rb 
