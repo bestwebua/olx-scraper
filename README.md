@@ -1,4 +1,4 @@
-# OLX data scraper
+# OLX web-data scraper
 Simple Ruby web-data scraper for OLX by Vladislav Trotsenko.
 
 ## Description
