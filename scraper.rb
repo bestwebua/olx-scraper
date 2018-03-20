@@ -6,6 +6,8 @@ require_relative 'config'
 
 class Scraper
 
+  attr_reader :ready, :url, :url_id, :grab_data
+
   def initialize(query, location)
     @query = query
     @location = location
@@ -25,8 +27,7 @@ class Scraper
           @page.find('#headerSearch').set(@query)
             @page.find('#cityField').click
           @page.find('#cityField').set(@location)
-        @page.find('#submit-searchmain').click
-      @page.find('#submit-searchmain').click
+        2.times { @page.find('#submit-searchmain').click }
       abort 'Nothing found!' if @page.has_content?('Не найдено ни одного объявления, соответствующего параметрам поиска.')
     @ready = true
   end
@@ -47,7 +48,7 @@ class Scraper
   end
 
   # Iteration by URL list from pagination and grab data with Nokogiri.
-  def data_grabber
+  def data_graber
     raise "Object isn't ready to parse" unless @ready
     (1...@url_id+1).map { |id| @url + id.to_s }.each do |url|
       @page.visit(url)
