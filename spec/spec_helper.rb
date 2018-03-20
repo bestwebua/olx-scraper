@@ -1,5 +1,3 @@
-require 'capybara'
-
 RSpec.configure do |config|
 
   config.expect_with :rspec do |expectations|
@@ -12,15 +10,6 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-  Capybara.register_driver :selenium do |app|  
-    Capybara::Selenium::Driver.new(app, browser: :firefox)
-  end
-
-  Capybara.javascript_driver = :firefox
-
-  Capybara.configure do |config|  
-    config.default_max_wait_time = 10
-    config.default_driver = :selenium
-  end
+  require_relative '../config'
 
 end

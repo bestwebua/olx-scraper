@@ -27,7 +27,7 @@ class Scraper
           @page.find('#headerSearch').set(@query)
             @page.find('#cityField').click
           @page.find('#cityField').set(@location)
-        2.times { @page.find('#submit-searchmain').click }
+        3.times { @page.find('#submit-searchmain').click }  #странный баг, capybara не всегда с первого раза реагирует на событие по этому объекту
       abort 'Nothing found!' if @page.has_content?('Не найдено ни одного объявления, соответствующего параметрам поиска.')
     @ready = true
   end
