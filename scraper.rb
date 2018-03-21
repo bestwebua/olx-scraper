@@ -21,15 +21,14 @@ class Scraper
     @driver = @page.driver.browser
     @page.visit('https://www.olx.ua')
     mandatory_items = ['#headerSearch', '#cityField', '#submit-searchmain']
-      abort 'No mandatory html & css items!' if mandatory_items.all? { |item| @page.has_no_css?(item) }
+      raise 'No mandatory html & css items!' if mandatory_items.all? { |item| @page.has_no_css?(item) }
       @page.find('#cookiesBar .close').click if @page.has_css?('#cookiesBar')
         @page.find('#headerSearch').click
           @page.find('#headerSearch').set(@query)
             @page.find('#cityField').click
           @page.find('#cityField').set(@location)
-        3.times { @page.find('#submit-searchmain').click }  #странный баг, capybara не всегда с первого раза реагирует на событие по этому объекту
-      abort 'Nothing found!' if @page.has_content?('Не найдено ни одного объявления, соответствующего параметрам поиска.')
-    @ready = true
+        3.times { @page.find('#submit-searchmain').click }
+      @ready = true if @page.has_no_content?('Не найдено ни одного объявления, соответствующего параметрам поиска.')
   end
 
   # Get URL stucture from results pagination if it exists.

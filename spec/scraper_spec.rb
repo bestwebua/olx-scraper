@@ -11,19 +11,20 @@ describe Scraper do
     expect { Scraper.new }.to raise_error(ArgumentError)
   end
 
- it '#ready should use SystemExit if nothing found' do
-    scraper = Scraper.new('ruby junior программист', 'Днепр')
-    expect { scraper.browser }.to raise_error(SystemExit)
-  end
-
   it '#ready should return false if class instance did not use #browser method' do
     expect(Scraper.new('жена на час', 'Днепр').ready).to eq(false)
   end
 
-  it '#ready should return true if something found' do
+  it '#ready should return true if something found by user request' do
     scraper = Scraper.new('жена на час', 'Днепр')
     scraper.browser
     expect(scraper.ready).to eq(true)
+  end
+
+   it '#ready should return false if nothing found by user request' do
+    scraper = Scraper.new('ruby junior программист', 'Днепр')
+    scraper.browser
+    expect(scraper.ready).to eq(false)
   end
 
   it '#pagination_parser should raise an error if instance method #ready return false' do
